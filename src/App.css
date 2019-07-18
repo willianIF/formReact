@@ -1,0 +1,72 @@
+.App {
+  margin: auto;
+  width: 70%;
+  text-align: left;
+}
+h2 {
+  text-align: center;
+  font-size: 500%;
+  font-weight: 300;
+  color: rgba(0,100,0);
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+  background: -webkit-linear-gradient( left, rgb(124,252,0) 50%,  rgb(0,128,128) 100%);
+  background: linear-gradient( to right, rgb(124,252,0) 50%, rgb(0,128,128)  100%);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-estagia{
+  border-radius: 3px;
+  background-image: -moz-linear-gradient( 122deg, rgb(0,128,128) 0%, rgb(124,252,0) 100%);
+  background-image: -webkit-linear-gradient( 122deg, rgb(0,128,128) 0%, rgb(124,252,0) 100%);
+  background-image: -ms-linear-gradient( 122deg, rgb(0,128,128) 0%, rgb(124,252,0) 100%);
+  background-image: linear-gradient( 122deg, rgb(0,128,128) 0%, rgb(124,252,0) 100%);
+  box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  color: #fff;
+  padding: 0.6rem 2rem;
+  border: 0;
+}
+.btn-list{
+  border-radius: 3px;
+  background-image: -moz-linear-gradient( 122deg, rgb(124,252,0) 0%, rgb(0,128,128) 100%);
+  background-image: -webkit-linear-gradient( 122deg, rgb(124,252,0) 0%, rgb(0,128,128) 100%);
+  background-image: -ms-linear-gradient( 122deg, rgb(124,252,0) 0%, rgb(0,128,128) 100%);
+  background-image: linear-gradient( 122deg, rgb(124,252,0) 0%, rgb(0,128,128) 100%);
+  box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  color: #fff;
+  border: 0;
+}
+.btn-danger-list{
+  border-radius: 3px;
+  background-image: -moz-linear-gradient( 122deg, rgb(252, 0, 0) 0%, rgb(128, 0, 75) 100%);
+  background-image: -webkit-linear-gradient( 122deg, rgb(252, 0, 0) 0%, rgb(128, 0, 75) 00%);
+  background-image: -ms-linear-gradient( 122deg, rgb(252, 0, 0) 0%, rgb(128, 0, 75) 100%);
+  background-image: linear-gradient( 122deg, rgb(252, 0, 0) 0%, rgb(128, 0, 75) 100%);
+  box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  color: #fff;
+  border: 0;
+}
+
+.ligth-g{
+  background-color: #f4fcf6;
+}
+
+.ligth-b{
+  background-color: rgb(137, 178, 189);
+}
+
+.sombra{
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.30);
+  -moz-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.30);
+  box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.30);
+}
+
+.vertical-middle{
+  vertical-align: middle
+}
