@@ -40,7 +40,7 @@ class App extends Component {
     });
     this.refs.formTarefas.reset();
     this.refs.nome.focus();
-    this.listar();
+    this.listar(); //Como resolver sem chamar duas vezes o listar?
     this.listar();  
   }
 
@@ -66,7 +66,6 @@ class App extends Component {
     });
     
     this.refs.nome.focus();
-    console.log(this.state.datas[i]);
   }
 
   render(){
