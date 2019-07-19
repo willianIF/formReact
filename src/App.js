@@ -90,7 +90,7 @@ class App extends Component {
               <div className="row">
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
-                    <span className="input-group-text ligth-b" id="basic-addon1">Horario da criação e da entrega</span>
+                    <span className="input-group-text ligth-b" id="basic-addon1">Data da criação e da entrega</span>
                   </div>
                   <input required="required" type="DateTime-Local" className="form-control" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" pattern="d{2}:d{2}" aria-label="horaCriacao" aria-describedby="basic-addon1" />
                   <input required="required" type="DateTime-Local" className="form-control" name="horaIntregaTarefa" ref="horaEntregaTarefa" pattern="d{2}:d{2}" aria-label="horaEntrega" aria-describedby="basic-addon1" />
