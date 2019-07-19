@@ -7,6 +7,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
+      act: 0,
+      index: '', 
       title: "Lista de tarefas",
       datas: []
     }
@@ -28,9 +30,17 @@ class App extends Component {
       horaEntregaTarefa: this.refs.horaEntregaTarefa.value,
       descricao: this.refs.descricao.value
     };
-    axios.post(formAPI, obj);
+    if(this.state.act === 0){
+      axios.post(formAPI, obj);
+    }else{
+      axios.put(formAPI + this.state.index, obj)
+    }
+    this.setState({
+      act: 0
+    });
     this.refs.formTarefas.reset();
     this.refs.nome.focus();
+    this.listar();
     this.listar();  
   }
 
@@ -42,24 +52,21 @@ class App extends Component {
     this.listar();
   }
 
-  editar = (event, tarefa) => {
+  editar = (event, tarefa,  i) => {
     event.preventDefault();
-    /*let data = this.state.datas[tarefa]; como pegar o valor do banco e colocar ele nos campos
+    let data = this.state.datas[i];
     this.refs.nome.value = data.nome;
     this.refs.horaCriacaoTarefa.value = data.horaCriacaoTarefa;
     this.refs.horaEntregaTarefa.value = data.horaEntregaTarefa;
-    this.refs.descricao.value = data.descricao;*/
+    this.refs.descricao.value = data.descricao;
 
-    const obj = {
-      nome: this.refs.nome.value,
-      horaCriacaoTarefa: this.refs.horaCriacaoTarefa.value,
-      horaEntregaTarefa: this.refs.horaEntregaTarefa.value,
-      descricao: this.refs.descricao.value
-    }
-    axios.put(formAPI + tarefa, obj);
+    this.setState({
+      act:1,
+      index: tarefa
+    });
     
     this.refs.nome.focus();
-    this.listar(); 
+    console.log(this.state.datas[i]);
   }
 
   render(){
@@ -86,7 +93,7 @@ class App extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text ligth-b" id="basic-addon1">Horario da criação e da entrega</span>
                   </div>
-                  <input required="required" type="time" className="form-control" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" pattern="d{2}:d{2}" aria-label="horaCriacao" aria-describedby="basic-addon1" />
+                  <input required="required" type="date" className="form-control" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" pattern="d{2}:d{2}" aria-label="horaCriacao" aria-describedby="basic-addon1" />
                   <input required="" type="time" className="form-control" name="horaIntregaTarefa" ref="horaEntregaTarefa" pattern="d{2}:d{2}" aria-label="horaEntrega" aria-describedby="basic-addon1" />
                 </div>
               </div>
@@ -121,7 +128,7 @@ class App extends Component {
                 </li>
                 <li className="list-group-item col-sm text-center">
                   <button type="button" className="btn btn-danger-list" onClick={(e)=>this.remover(e, data.id)}>Remover</button>
-                  <button type="button" className="btn btn-list" onClick={(e)=>this.editar(e, data.id)}>Editar</button>
+                  <button type="button" className="btn btn-list" onClick={(e)=>this.editar(e, data.id, i)}>Editar</button>
                 </li>
               </ul>
               )}
