@@ -44,6 +44,12 @@ class App extends Component {
 
   editar = (event, tarefa) => {
     event.preventDefault();
+    /*let data = this.state.datas[tarefa]; como pegar o valor do banco e colocar ele nos campos
+    this.refs.nome.value = data.nome;
+    this.refs.horaCriacaoTarefa.value = data.horaCriacaoTarefa;
+    this.refs.horaEntregaTarefa.value = data.horaEntregaTarefa;
+    this.refs.descricao.value = data.descricao;*/
+
     const obj = {
       nome: this.refs.nome.value,
       horaCriacaoTarefa: this.refs.horaCriacaoTarefa.value,
@@ -51,7 +57,7 @@ class App extends Component {
       descricao: this.refs.descricao.value
     }
     axios.put(formAPI + tarefa, obj);
-
+    
     this.refs.nome.focus();
     this.listar(); 
   }
@@ -107,7 +113,7 @@ class App extends Component {
                 </li>
 
                 <li className="list-group-item col-sm">
-                  <h5>Hora da entrega : {data.horaEntregaTarefa}</h5> 
+                  <h5>Hora da entrega: {data.horaEntregaTarefa}</h5> 
                 </li>
 
                 <li className="list-group-item col-sm">
