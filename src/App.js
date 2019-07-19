@@ -83,7 +83,7 @@ class App extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text ligth-b" id="basic-addon1">Nome</span>
                   </div>
-                  <input required oninvalid="this.setCustomValidity('Campo requerido')" type="text" className="form-control" name="nome" ref="nome" placeholder="Insira o Nome da tarefa" aria-label="nome" aria-describedby="basic-addon1" />
+                  <input required="required" type="text" className="form-control" name="nome" ref="nome" placeholder="Insira o Nome da tarefa" aria-label="nome" aria-describedby="basic-addon1" />
                 </div>
               </div>
 
@@ -92,8 +92,8 @@ class App extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text ligth-b" id="basic-addon1">Horario da criação e da entrega</span>
                   </div>
-                  <input required="required" type="date" className="form-control" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" pattern="d{2}:d{2}" aria-label="horaCriacao" aria-describedby="basic-addon1" />
-                  <input required="" type="time" className="form-control" name="horaIntregaTarefa" ref="horaEntregaTarefa" pattern="d{2}:d{2}" aria-label="horaEntrega" aria-describedby="basic-addon1" />
+                  <input required="required" type="DateTime-Local" className="form-control" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" pattern="d{2}:d{2}" aria-label="horaCriacao" aria-describedby="basic-addon1" />
+                  <input required="required" type="DateTime-Local" className="form-control" name="horaIntregaTarefa" ref="horaEntregaTarefa" pattern="d{2}:d{2}" aria-label="horaEntrega" aria-describedby="basic-addon1" />
                 </div>
               </div>
               <div className="row">
@@ -101,7 +101,7 @@ class App extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text ligth-b" id="basic-addon1">Descrição</span>
                   </div>
-                  <textarea required="" className="form-control" name="descricao" ref="descricao" placeholder="Descreva a tarefa que ira ser realizada" aria-label="descricao" aria-describedby="basic-addon1" />
+                  <textarea required="required" className="form-control" name="descricao" ref="descricao" placeholder="Descreva a tarefa que ira ser realizada" aria-label="descricao" aria-describedby="basic-addon1" />
                 </div>
               </div>
               <div className="row justify-content-md-center">
