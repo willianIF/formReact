@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './App.css';
-const formAPI = 'http://localhost:1337/tarefas/';
+const formAPI = 'https://crudformapi.herokuapp.com/tarefas/';
 
 class App extends Component {
   constructor(props){
