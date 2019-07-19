@@ -68,6 +68,13 @@ class App extends Component {
     this.refs.nome.focus();
   }
 
+  dateFormat(date){
+    let format = date.replace(/T/, " ").split(" ");
+    let d = format[0].split("-").reverse().join("-");
+    d += " " + format[1];
+    return d;
+  }
+
   render(){
     let datas = this.state.datas;
     return (
@@ -92,8 +99,8 @@ class App extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text ligth-b" id="basic-addon1">Data da criação e da entrega</span>
                   </div>
-                  <input required="required" type="DateTime-Local" className="form-control" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" pattern="d{2}:d{2}" aria-label="horaCriacao" aria-describedby="basic-addon1" />
-                  <input required="required" type="DateTime-Local" className="form-control" name="horaIntregaTarefa" ref="horaEntregaTarefa" pattern="d{2}:d{2}" aria-label="horaEntrega" aria-describedby="basic-addon1" />
+                  <input required="required" type="DateTime-Local" className="form-control" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" aria-label="horaCriacao" aria-describedby="basic-addon1" />
+                  <input required="required" type="DateTime-Local" className="form-control" name="horaIntregaTarefa" ref="horaEntregaTarefa" aria-label="horaEntrega" aria-describedby="basic-addon1" />
                 </div>
               </div>
               <div className="row">
@@ -115,11 +122,11 @@ class App extends Component {
               <ul className="list-group">
                 <li key={i} className="list-group-item col-sm">
                   <h4><span className="badge badge-secondary color-red col-sm">Tarefa: {i + 1} Nome: {data.nome}</span></h4>
-                  <h5>Hora da criação: {data.horaCriacaoTarefa}</h5> 
+                  <h5>Data e hora da criação: {this.dateFormat(data.horaCriacaoTarefa)}</h5> 
                 </li>
 
                 <li className="list-group-item col-sm">
-                  <h5>Hora da entrega: {data.horaEntregaTarefa}</h5> 
+                  <h5>Data e hora da entrega: {this.dateFormat(data.horaEntregaTarefa)}</h5> 
                 </li>
 
                 <li className="list-group-item col-sm">
