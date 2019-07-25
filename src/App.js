@@ -91,7 +91,7 @@ class App extends Component {
         <h2 className="title">
           {this.state.title}
         </h2>
-        <div className="jumbotron ligth-g sombra">
+        <div className="jumbotron ligth-g shadow p-3 mb-5 bg-white rounded">
           <div className="Container">
             <form ref="formTarefas" className="form-group">
               <div className="row">
@@ -99,7 +99,7 @@ class App extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text ligth-b" id="basic-addon1">Nome</span>
                   </div>
-                  <input type="text" className="form-control" name="nome" ref="nome" placeholder="Insira o Nome da tarefa" aria-label="nome" aria-describedby="basic-addon1" required="required" />
+                  <input type="text" className="form-control" name="nome" ref="nome" placeholder="Nome da tarefa" aria-label="nome" aria-describedby="basic-addon1" required="required" />
                 </div>
               </div>
 
@@ -117,7 +117,7 @@ class App extends Component {
                   <div className="input-group-prepend">
                     <span className="input-group-text ligth-b" id="basic-addon1">Descrição</span>
                   </div>
-                  <textarea className="form-control" name="descricao" ref="descricao" placeholder="Descreva a tarefa que ira ser realizada" aria-label="descricao" aria-describedby="basic-addon1" required="required" />
+                  <textarea className="form-control" name="descricao" ref="descricao" placeholder="Descrição da tarefa" aria-label="descricao" aria-describedby="basic-addon1" required="required" />
                 </div>
               </div>
               <div className="row justify-content-md-center">
@@ -126,26 +126,26 @@ class App extends Component {
                   </div>
                 </div>
             </form>    
-            <pre>
+            <pre className="pre">
               {datas.map((data, i) =>
-              <ul className="list-group">
-                <li key={i} className="list-group-item col-sm">
-                  <h4><span className="badge badge-secondary color-red col-sm">Tarefa: {i + 1} Nome: {data.nome}</span></h4>
-                  <h5>Data e hora da criação: {this.dateFormat(data.horaCriacaoTarefa)}</h5> 
-                </li>
-
-                <li className="list-group-item col-sm">
-                  <h5>Data e hora da entrega: {this.dateFormat(data.horaEntregaTarefa)}</h5> 
-                </li>
-
-                <li className="list-group-item col-sm">
-                  <h5>Descrição: {data.descricao}</h5> 
-                </li>
-                <li className="list-group-item col-sm text-center">
-                  <button type="button" className="btn btn-danger-list margin-button" onClick={(e)=>this.remover(e, data.id)}>Remover</button>
-                  <button type="button" className="btn btn-list" onClick={(e)=>this.editar(e, data.id, i)}>Editar</button>
-                </li>
-              </ul>
+                <div className="jumbotron">
+                  <ul className="list-group">
+                    <li key={i} className="list-group-item col-sm">
+                    <h4><span className="badge badge-secondary col-sm span">Tarefa: {i + 1} Nome: {data.nome}</span></h4>
+                      <h5>{`Data e hora da criação: ${this.dateFormat(data.horaCriacaoTarefa)}`}</h5> 
+                    </li>
+                    <li className="list-group-item col-sm">
+                      <h5>{`Data e hora da entrega: ${this.dateFormat(data.horaEntregaTarefa)}`}</h5> 
+                    </li>
+                    <li className="list-group-item col-sm">
+                      <h5>{`Descrição:${data.descricao}`}</h5>
+                    </li>
+                    <li className="list-group-item col-sm text-center">
+                      <button type="button" className="btn btn-danger-list margin-button" onClick={(e)=>this.remover(e, data.id)}>Remover</button>
+                      <button type="button" className="btn btn-list" onClick={(e)=>this.editar(e, data.id, i)}>Editar</button>
+                    </li>
+                  </ul>
+                </div>
               )}
             </pre>
           </div> 

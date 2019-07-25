@@ -57,7 +57,7 @@ h2 {
 }
 
 .ligth-b{
-  background-color: rgb(137, 178, 189);
+  background-color: rgb(172, 214, 226);
 }
 
 .sombra{
@@ -69,4 +69,15 @@ h2 {
 
 .margin-button{
   margin-right: 2%
+}
+
+.pre{
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: justify
+}
+
+.span{
+  white-space: pre-wrap;
+  word-break: break-word
 }
