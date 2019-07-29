@@ -81,3 +81,8 @@ h2 {
   white-space: pre-wrap;
   word-break: break-word
 }
+
+.text-descricao{
+  overflow: auto;
+  min-height: 30vh;
+}

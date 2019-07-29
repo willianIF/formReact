@@ -137,7 +137,7 @@ class App extends Component {
                     <li className="list-group-item col-sm">
                       <h5>{`Data e hora da entrega: ${this.dateFormat(data.horaEntregaTarefa)}`}</h5> 
                     </li>
-                    <li className="list-group-item col-sm">
+                    <li className="list-group-item col-sm text-descricao">
                       <h5>{`Descrição:${data.descricao}`}</h5>
                     </li>
                     <li className="list-group-item col-sm text-center">
