@@ -8,6 +8,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import './App.css';
+import Col from 'react-bootstrap/Col';
 const formAPI = 'https://crudformapi.herokuapp.com/tarefas/';
 
 class App extends Component {
@@ -99,39 +100,35 @@ class App extends Component {
           {this.state.title}
         </h2>
         <Jumbotron className="ligth-g shadow p-3 mb-5 bg-white rounded">
-          <Form>
-          </Form>
-          <form ref="formTarefas" className="form-group">
-            <div className="row">
-              <div className="input-group mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text ligth-b" id="basic-addon1">Nome</span>
-                </div>
-                <input type="text" className="form-control" name="nome" ref="nome" placeholder="Nome da tarefa" aria-label="nome" aria-describedby="basic-addon1" required="required" />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="input-group mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text ligth-b" id="basic-addon1">Data da criação e da entrega</span>
-                </div>
-                <input type="DateTime-Local" className="form-control" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" aria-label="horaCriacao" aria-describedby="basic-addon1" required="required" />
-                <input type="DateTime-Local" className="form-control" name="horaIntregaTarefa" ref="horaEntregaTarefa" aria-label="horaEntrega" aria-describedby="basic-addon1" required="required" />
-              </div>
-            </div>
-            <div className="row">
-              <div className="input-group mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text ligth-b" id="basic-addon1">Descrição</span>
-                </div>
-                <textarea className="form-control" name="descricao" ref="descricao" placeholder="Descrição da tarefa" aria-label="descricao" aria-describedby="basic-addon1" required="required" />
-              </div>
-            </div>
-            <div className="row justify-content-md-center">
-              <Button variant="btn btn-estagia" onClick={(e) => this.cadastrar(e)}>Adicionar</ Button>
-            </div>
-          </form>
+          <Container>
+            <Form ref="formTarefas">
+              <Form.Group controlId="nomeAlunos">
+                <Form.Label>Nome</Form.Label>
+                <Form.Control type="text" name="nome" ref="nome" placeholder="Nome da tarefa" required="required"></Form.Control>
+              </Form.Group>
+              <Form.Row controlId="datasTarefas">
+                <Form.Group >
+                  <Col>
+                    <Form.Label>Data da criação da tarefa</Form.Label>
+                    <Form.Control type="DateTime-Local" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" required="required"></Form.Control>
+                  </Col>
+                </Form.Group>
+                <Form.Group>
+                  <Col>
+                    <Form.Label>Data da entrega da tarefa</Form.Label>
+                    <Form.Control type="DateTime-Local" name="horaIntregaTarefa" ref="horaEntregaTarefa" required="required"></Form.Control>
+                  </Col>
+                </Form.Group>
+              </Form.Row>
+              <Form.Group>
+                <Form.Label>Descrição</Form.Label>
+                <Form.Control as="textarea" rows="3" ref="descricao" placeholder="Descrição da tarefa" required="required"></Form.Control>
+              </Form.Group>
+              <Container className="row justify-content-md-center">
+                <Button variant="btn btn-estagia" onClick={(e) => this.cadastrar(e)}>Adicionar</ Button>
+              </Container>
+            </Form>
+          </Container>
           <Jumbotron>
             <pre className="pre">
               {datas.map((data, i) =>
@@ -146,7 +143,7 @@ class App extends Component {
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
                           <Card.Body>
-                            
+
                             <ListGroup.Item>
                               <h5>{`Data e hora da criação: ${this.dateFormat(data.horaCriacaoTarefa)}`}</h5>
                             </ListGroup.Item>
