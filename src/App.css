@@ -84,5 +84,9 @@ h2 {
 
 .text-descricao{
   overflow: auto;
-  min-height: 30vh;
+  max-height: 20vh;
+}
+
+.card{
+  border: none;
 }
