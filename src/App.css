@@ -1,9 +1,38 @@
+@font-face {
+  font-family: 'phenomenaregular';
+  src: url('./phenomena/phenomena-regular-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .App {
   margin: auto;
   width: 70%;
   text-align: left;
+  margin-top: 10%;
 }
-h2 {
+
+#linkCadastro{
+  color: white;
+  font-family: "phenomenaregular";
+  font-size: 20px;
+  margin: 0%;
+}
+
+p{
+  color: black;
+  margin: 0%;
+  font-family: "phenomenaregular";
+}
+
+h2{
+  color: white;
+  font-family: "phenomenaregular";
+  margin: 0%;
+}
+
+
+/* h2 {
   text-align: center;
   font-size: 500%;
   font-weight: 300;
@@ -15,7 +44,7 @@ h2 {
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
+} */
 
 .btn-estagia{
   border-radius: 3px;
@@ -67,11 +96,11 @@ h2 {
   box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, .30);
 }
 
-.margin-button{
+#btnRemover{
   margin-right: 2%
 }
 
-.pre{
+pre{
   white-space: pre-wrap;
   word-wrap: break-word;
   text-align: justify
@@ -89,4 +118,35 @@ h2 {
 
 .card{
   border: none;
+  padding: 0%;
 }
+
+.itemLista{
+  padding: 1%;
+}
+
+.navlink{
+  text-align: right;
+}
+
+.navBar{
+  background-color: rgb(0,128,128);
+  background: -moz-linear-gradient(135deg, rgb(0,128,128) 0%, rgb(124,252,0) 100%);
+  background: -webkit-linear-gradient(135deg, rgb(0,128,128) 0%, rgb(124,252,0)  100%);
+  background: linear-gradient(135deg, rgb(0,128,128) 0%, rgb(124,252,0)  100%);
+  -webkit-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.30);
+  -moz-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.30);
+  box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.30);
+  border-radius: 10px 10px 0px 0px;
+  padding: 2%;
+}
+
+.bordaJumbotron{
+  border-radius: 10px 10px 0px 0px;
+}
+
+.jumbo{
+  margin: 3%;
+  padding: 2%;
+}
+

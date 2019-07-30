@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Card from 'react-bootstrap/Card';
-import Accordion from 'react-bootstrap/Accordion';
-import Container from 'react-bootstrap/Container';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import './App.css';
-import Col from 'react-bootstrap/Col';
+import { Button, Jumbotron, Card, Accordion, Container, ListGroup, Form, Navbar, Nav, FormControl, Col } from 'react-bootstrap';
 const formAPI = 'https://crudformapi.herokuapp.com/tarefas/';
 
 class App extends Component {
@@ -17,7 +10,6 @@ class App extends Component {
     this.state = {
       act: 0,
       index: '',
-      title: "Lista de tarefas",
       datas: []
     }
   }
@@ -96,46 +88,57 @@ class App extends Component {
     let datas = this.state.datas;
     return (
       <Container className="App">
-        <h2 className="title">
-          {this.state.title}
-        </h2>
-        <Jumbotron className="ligth-g shadow p-3 mb-5 bg-white rounded">
+
+        <Jumbotron className="ligth-g shadow p-0 bordaJumbotron">
+          <Navbar bgh="ligth" expand="lg" className="navBar">
+            <Navbar.Brand><h2>Lista de alunos</h2></Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="ml-auto">
+                <Nav.Link href="#cadastrarAluno" className="navlink"><p id="linkCadastro">Cadastrar novo aluno</p></Nav.Link>
+              </Nav>
+              <Form inline>
+                <FormControl type="text" placeholder="Buscar aluno" className="mr-sm-2" />
+                <Button variant="outline-success"><p>Pesquisar</p></Button>
+              </Form>
+            </Navbar.Collapse>
+          </Navbar>
+
           <Container>
             <Form ref="formTarefas">
               <Form.Group controlId="nomeAlunos">
                 <Form.Label>Nome</Form.Label>
                 <Form.Control type="text" name="nome" ref="nome" placeholder="Nome da tarefa" required="required"></Form.Control>
               </Form.Group>
-              <Form.Row controlId="datasTarefas">
-                <Form.Group >
-                  <Col>
-                    <Form.Label>Data da criação da tarefa</Form.Label>
-                    <Form.Control type="DateTime-Local" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" required="required"></Form.Control>
-                  </Col>
-                </Form.Group>
-                <Form.Group>
-                  <Col>
-                    <Form.Label>Data da entrega da tarefa</Form.Label>
-                    <Form.Control type="DateTime-Local" name="horaIntregaTarefa" ref="horaEntregaTarefa" required="required"></Form.Control>
-                  </Col>
-                </Form.Group>
+              <Form.Row>
+                <Col>
+                  <Form.Label>Data da criação da tarefa</Form.Label>
+                  <Form.Control type="DateTime-Local" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" required="required"></Form.Control>
+                </Col>
+                <Col>
+                  <Form.Label>Data da entrega da tarefa</Form.Label>
+                  <Form.Control type="DateTime-Local" name="horaIntregaTarefa" ref="horaEntregaTarefa" required="required"></Form.Control>
+                </Col>
               </Form.Row>
+
+
               <Form.Group>
                 <Form.Label>Descrição</Form.Label>
                 <Form.Control as="textarea" rows="3" ref="descricao" placeholder="Descrição da tarefa" required="required"></Form.Control>
               </Form.Group>
-              <Container className="row justify-content-md-center">
+              <Container className="text-center">
                 <Button variant="btn btn-estagia" onClick={(e) => this.cadastrar(e)}>Adicionar</ Button>
               </Container>
             </Form>
           </Container>
-          <Jumbotron>
-            <pre className="pre">
+
+          <Jumbotron className="jumbo">
+            <pre>
               {datas.map((data, i) =>
-                <ListGroup>
-                  <ListGroup.Item key={i}>
+                <ListGroup key={i}>
+                  <ListGroup.Item >
                     <Accordion defaultActiveKey="1">
-                      <Card className="card">
+                      <Card>
                         <Card.Header className="card">
                           <Accordion.Toggle as={Button} variant="link" eventKey="0">
                             <h4><span className="badge badge-secondary col-sm span">Tarefa: {i + 1} Nome: {data.nome}</span></h4>
@@ -156,10 +159,10 @@ class App extends Component {
                               <h5>{`Descrição:${data.descricao}`}</h5>
                             </ListGroup.Item>
 
-                            <buttonToolbar className="list-group-item text-center">
-                              <Button variant="btn btn-danger-list margin-button" onClick={(e) => this.remover(e, data.id)}>Remover</ Button>
+                            <Container className="list-group-item text-center">
+                              <Button id="btnRemover" variant="btn btn-danger-list" onClick={(e) => this.remover(e, data.id)}>Remover</ Button>
                               <Button variant="btn btn-list" onClick={(e) => this.editar(e, data.id, i)}>Editar</ Button>
-                            </buttonToolbar>
+                            </Container>
 
                           </Card.Body>
                         </Accordion.Collapse>
