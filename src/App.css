@@ -134,19 +134,18 @@ pre{
   background: -moz-linear-gradient(135deg, rgb(0,128,128) 0%, rgb(124,252,0) 100%);
   background: -webkit-linear-gradient(135deg, rgb(0,128,128) 0%, rgb(124,252,0)  100%);
   background: linear-gradient(135deg, rgb(0,128,128) 0%, rgb(124,252,0)  100%);
-  -webkit-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.30);
-  -moz-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.30);
-  box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.30);
   border-radius: 10px 10px 0px 0px;
   padding: 2%;
 }
 
 .bordaJumbotron{
   border-radius: 10px 10px 0px 0px;
+  padding: 0%;
+  padding-bottom: 0.5%; 
 }
 
 .jumbo{
-  margin: 3%;
+  margin: 1%;
   padding: 2%;
 }
 

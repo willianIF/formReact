@@ -89,8 +89,8 @@ class App extends Component {
     return (
       <Container className="App">
 
-        <Jumbotron className="ligth-g shadow p-0 bordaJumbotron">
-          <Navbar bgh="ligth" expand="lg" className="navBar">
+        <Jumbotron className="ligth-g shadow bordaJumbotron">
+          <Navbar bgh="ligth" expand="lg" className="navBar shadow">
             <Navbar.Brand><h2>Lista de alunos</h2></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -120,8 +120,6 @@ class App extends Component {
                   <Form.Control type="DateTime-Local" name="horaIntregaTarefa" ref="horaEntregaTarefa" required="required"></Form.Control>
                 </Col>
               </Form.Row>
-
-
               <Form.Group>
                 <Form.Label>Descrição</Form.Label>
                 <Form.Control as="textarea" rows="3" ref="descricao" placeholder="Descrição da tarefa" required="required"></Form.Control>
