@@ -103,7 +103,8 @@ h2{
 pre{
   white-space: pre-wrap;
   word-wrap: break-word;
-  text-align: justify
+  text-align: justify;
+  margin: 0%;
 }
 
 .span{
@@ -141,11 +142,12 @@ pre{
 .bordaJumbotron{
   border-radius: 10px 10px 0px 0px;
   padding: 0%;
-  padding-bottom: 0.5%; 
+  padding-bottom: 1%;
 }
 
 .jumbo{
   margin: 1%;
-  padding: 2%;
+  margin-bottom: 0%;
+  padding: 1%;
 }
 

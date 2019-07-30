@@ -134,7 +134,7 @@ class App extends Component {
             <pre>
               {datas.map((data, i) =>
                 <ListGroup key={i}>
-                  <ListGroup.Item >
+                  <ListGroup.Item className="itemLista">
                     <Accordion defaultActiveKey="1">
                       <Card>
                         <Card.Header className="card">
