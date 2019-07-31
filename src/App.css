@@ -13,16 +13,33 @@
 }
 
 #linkCadastro{
-  color: white;
+  color: black;
   font-family: "phenomenaregular";
   font-size: 20px;
   margin: 0%;
 }
 
-p{
+.border-link{
+  height: 4vh;
+  width: 100%;
+  border-bottom:0.2vh solid currentColor;
+  border-color: rgb(124,252,0);
+}
+
+.p-form{
   color: black;
   margin: 0%;
   font-family: "phenomenaregular";
+  font-size: 120%;
+}
+
+.form-group{
+  margin: 0%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+.form-row{
+  margin-bottom: 2%;
 }
 
 h2{
@@ -111,9 +128,6 @@ pre{
   padding: 1%;
 }
 
-.navlink{
-  text-align: right;
-}
 
 .navBar{
   background-color: rgb(0,128,128);
@@ -135,4 +149,3 @@ pre{
   margin-bottom: 0%;
   padding: 1%;
 }
-

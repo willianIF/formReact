@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import { Button, Jumbotron, Card, Accordion, Container, ListGroup, Form, Navbar, Nav, FormControl, Col } from 'react-bootstrap';
-const formAPI = 'https://crudformapi.herokuapp.com/tarefas/';
+const estagiaAPI = 'https://crudformapi.herokuapp.com/tarefas/';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.toggle = this.toggle.bind(this);
     this.state = {
+      event: 1,
       act: 0,
       index: '',
       datas: []
@@ -18,7 +20,7 @@ class App extends Component {
     this.listar(1);
   }
   async listar(n) {
-    const { data: datas } = await axios.get(formAPI);
+    const { data: datas } = await axios.get(estagiaAPI);
     if (n === 1) {
       return this.setState({ datas });
     } else {
@@ -31,43 +33,52 @@ class App extends Component {
     event.preventDefault();
     const obj = {
       nome: this.refs.nome.value,
-      horaCriacaoTarefa: this.refs.horaCriacaoTarefa.value,
-      horaEntregaTarefa: this.refs.horaEntregaTarefa.value,
-      descricao: this.refs.descricao.value
+      CPF: this.refs.CPF.value,
+      RG: this.refs.RG.value,
+      dataNasc: this.refs.dataNasc.value,
+      endereco: this.refs.endereco.value,
+      cidade: this.refs.cidade.value,
+      email: this.refs.email.value,
+      telefone: this.refs.telefone.value
     };
 
-    if (obj.nome === "" || obj.horaCriacaoTarefa === "" || obj.horaEntregaTarefa === "" || obj.descricao === "") {
-      alert("Campo(s) não preenchidos!");
+    if (obj.nome === "" || obj.CPF === "" || obj.RG === "" || obj.dataNasc === "" || obj.endereco === "" || obj.cidade === "" || obj.email === "" || obj.telefone === "") {
+    alert("Campo(s) não preenchidos!");
     } else {
-      if (this.state.act === 0) {
-        axios.post(formAPI, obj);
-      } else {
-        axios.put(formAPI + this.state.index, obj);
-      }
-      this.setState({
-        act: 0
-      });
+    if (this.state.act === 0) {
+      axios.post(estagiaAPI, obj);
+    } else {
+      axios.put(estagiaAPI + this.state.index, obj);
+    }
+    this.setState({
+      act: 0
+    });
 
-      this.refs.formTarefas.reset();
-      this.refs.nome.focus();
-      this.listar(0);
+    this.refs.formTarefas.reset();
+    this.refs.nome.focus();
+    this.listar(0);
     }
   }
 
   remover = (event, tarefas) => {
     event.preventDefault();
-    axios.delete(formAPI + tarefas);
+    axios.delete(estagiaAPI + tarefas);
     this.refs.formTarefas.reset();
     this.listar(0);
   }
 
   editar = (event, tarefa, i) => {
     event.preventDefault();
+
     let data = this.state.datas[i];
     this.refs.nome.value = data.nome;
-    this.refs.horaCriacaoTarefa.value = data.horaCriacaoTarefa;
-    this.refs.horaEntregaTarefa.value = data.horaEntregaTarefa;
-    this.refs.descricao.value = data.descricao;
+    this.refs.CPF.value = data.CPF;
+    this.refs.RG.value = data.RG;
+    this.refs.dataNasc.value = data.dataNasc;
+    this.refs.endereco.value = data.endereco;
+    this.refs.cidade.value = data.cidade;
+    this.refs.email.value = data.email;
+    this.refs.telefone.value = data.telefone;
 
     this.setState({
       act: 1,
@@ -84,62 +95,95 @@ class App extends Component {
     return d;
   }
 
+  toggle() {
+    this.setState({
+      event: 0,
+    });
+  }
+
   render() {
     let datas = this.state.datas;
     return (
       <Container className="App">
-
         <Jumbotron className="ligth-g shadow bordaJumbotron">
-          <Navbar bgh="ligth" expand="lg" className="navBar shadow">
-            <Navbar.Brand><h2>Lista de alunos</h2></Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="ml-auto">
-                <Nav.Link href="#cadastrarAluno" className="navlink"><p id="linkCadastro">Cadastrar novo aluno</p></Nav.Link>
-              </Nav>
-              <Form inline>
-                <FormControl type="text" placeholder="Buscar aluno" className="mr-sm-2" />
-                <Button variant="outline-success"><p>Pesquisar</p></Button>
-              </Form>
-            </Navbar.Collapse>
-          </Navbar>
+          <Accordion defaultActiveKey="1">
+            <Navbar bgh="ligth" expand="lg" className="navBar shadow">
+              <Navbar.Brand><h2>LISTA DE ALUNOS</h2></Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="ml-auto">
+                  <Form inline>
 
-          <Container>
-            <Form ref="formTarefas">
-              <Form.Group controlId="nomeAlunos">
-                <Form.Label>Nome</Form.Label>
-                <Form.Control type="text" name="nome" ref="nome" placeholder="Nome da tarefa" required="required"></Form.Control>
-              </Form.Group>
-              <Form.Row>
-                <Col>
-                  <Form.Label>Data da criação da tarefa</Form.Label>
-                  <Form.Control type="DateTime-Local" name="horaCriacaoTarefa" ref="horaCriacaoTarefa" required="required"></Form.Control>
-                </Col>
-                <Col>
-                  <Form.Label>Data da entrega da tarefa</Form.Label>
-                  <Form.Control type="DateTime-Local" name="horaIntregaTarefa" ref="horaEntregaTarefa" required="required"></Form.Control>
-                </Col>
-              </Form.Row>
-              <Form.Group>
-                <Form.Label>Descrição</Form.Label>
-                <Form.Control as="textarea" rows="3" ref="descricao" placeholder="Descrição da tarefa" required="required"></Form.Control>
-              </Form.Group>
-              <Container className="text-center">
-                <Button variant="btn btn-estagia" onClick={(e) => this.cadastrar(e)}>Adicionar</ Button>
+                    <FormControl type="text" placeholder="Insira o nome do aluno" className="mr-sm-2" />
+                    <Button variant="outline-success"><p className="p-form">Pesquisar</p></Button>
+                  </Form>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+
+            <Container className="text-center">
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                <p id="linkCadastro" className="border-link">Cadastrar novo aluno</p>
+              </Accordion.Toggle>
+            </Container>
+
+            <Accordion.Collapse eventKey="0">
+              <Container>
+                <Form ref="dadosAlunos">
+                  <Form.Group>
+                    <Form.Label><p className="p-form">Nome</p></Form.Label>
+                    <Form.Control type="text" name="nome" ref="nome" placeholder="Nome do aluno" required="required"></Form.Control>
+                  </Form.Group>
+
+                  <Form.Row>
+                    <Col>
+                      <Form.Label><p className="p-form">CPF</p></Form.Label>
+                      <Form.Control type="text" name="CPF" ref="CPF" placeholder="000.000.000-00" required="required"></Form.Control>
+                    </Col>
+                    <Col>
+                      <Form.Label><p className="p-form">RG</p></Form.Label>
+                      <Form.Control type="numeric" name="RG" ref="RG" placeholder="Rg do aluno" required="required"></Form.Control>
+                    </Col>
+                    <Col>
+                      <Form.Label><p className="p-form">Data de nascimento</p></Form.Label>
+                      <Form.Control type="Date" name="dataNasc" ref="dataNasc" required="required"></Form.Control>
+                    </Col>
+                  </Form.Row>
+                  <Form.Row>
+                    <Col>
+                      <Form.Label><p className="p-form">Endereço</p></Form.Label>
+                      <Form.Control type="text" name="endereco" ref="endereco" placeholder="Endereço do aluno" required="required"></Form.Control>
+                    </Col>
+                    <Col>
+                      <Form.Label><p className="p-form">Cidade</p></Form.Label>
+                      <Form.Control type="text" name="cidade" ref="cidade" placeholder="Cidade do aluno" required="required"></Form.Control>
+                    </Col>
+                  </Form.Row>
+
+                  <Form.Group>
+                    <Form.Label><p className="p-form">E-mail</p></Form.Label>
+                    <Form.Control type="email" name="email" ref="email" className="form-group" placeholder="exemplo@exemplo.com" required="required"></Form.Control>
+                    <Form.Label><p className="p-form">Telefone</p></Form.Label>
+                    <Form.Control type="text" name="telefone" ref="telefone" className="form-group" placeholder="Telefone do aluno" required="required"></Form.Control>
+                  </Form.Group>
+                  <Container className="text-center">
+                    <Button variant="btn btn-estagia" onClick={(e) => this.cadastrar(e)}>Adicionar</ Button>
+                  </Container>
+                </Form>
               </Container>
-            </Form>
-          </Container>
+            </Accordion.Collapse>
+          </Accordion>
 
           <Jumbotron className="jumbo">
             <pre>
               {datas.map((data, i) =>
                 <ListGroup key={i}>
-                  <ListGroup.Item className="itemLista">
+                  <ListGroup.Item>
                     <Accordion defaultActiveKey="1">
                       <Card>
                         <Card.Header className="card">
                           <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                            <h4><span className="badge badge-secondary col-sm span">Tarefa: {i + 1} Nome: {data.nome}</span></h4>
+                            <h5 className="p-form">Nome: {data.nome}</h5>
                           </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
