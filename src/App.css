@@ -20,7 +20,7 @@
 }
 
 .border-link{
-  height: 4vh;
+  height: 5vh;
   width: 100%;
   border-bottom:0.2vh solid currentColor;
   border-color: rgb(124,252,0);
@@ -46,6 +46,14 @@ h2{
   color: white;
   font-family: "phenomenaregular";
   margin: 0%;
+}
+
+.h5-form{
+  color: black;
+  margin: 0%;
+  font-family: "phenomenaregular";
+  font-size: 150%;
+  text-align: left;
 }
 
 .btn-estagia{
@@ -148,4 +156,24 @@ pre{
   margin: 1%;
   margin-bottom: 0%;
   padding: 1%;
+}
+
+.coluna{
+  height: 6vh;
+  padding-left: 0%;
+  padding-right: 0%;
+  /* border: 0.1vh solid; */
+  border-color: black; 
+}
+
+.p-lista{
+  font-size: 120%;
+  padding-left: 5%;
+  text-align: left;
+}
+
+.container-lista{
+  border: 0.1vh;
+  border-radius: 5px;
+  border-color: black; 
 }

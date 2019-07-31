@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
-import { Button, Jumbotron, Card, Accordion, Container, ListGroup, Form, Navbar, Nav, FormControl, Col } from 'react-bootstrap';
+import { Row, Button, Jumbotron, Card, Accordion, Container, ListGroup, Form, Navbar, Nav, FormControl, Col } from 'react-bootstrap';
 const estagiaAPI = 'https://crudformapi.herokuapp.com/tarefas/';
 
 class App extends Component {
@@ -43,20 +43,20 @@ class App extends Component {
     };
 
     if (obj.nome === "" || obj.CPF === "" || obj.RG === "" || obj.dataNasc === "" || obj.endereco === "" || obj.cidade === "" || obj.email === "" || obj.telefone === "") {
-    alert("Campo(s) não preenchidos!");
+      alert("Campo(s) não preenchidos!");
     } else {
-    if (this.state.act === 0) {
-      axios.post(estagiaAPI, obj);
-    } else {
-      axios.put(estagiaAPI + this.state.index, obj);
-    }
-    this.setState({
-      act: 0
-    });
+      if (this.state.act === 0) {
+        axios.post(estagiaAPI, obj);
+      } else {
+        axios.put(estagiaAPI + this.state.index, obj);
+      }
+      this.setState({
+        act: 0
+      });
 
-    this.refs.formTarefas.reset();
-    this.refs.nome.focus();
-    this.listar(0);
+      this.refs.formTarefas.reset();
+      this.refs.nome.focus();
+      this.listar(0);
     }
   }
 
@@ -121,7 +121,7 @@ class App extends Component {
               </Navbar.Collapse>
             </Navbar>
 
-            <Container className="text-center">
+            <Container align="Right">
               <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 <p id="linkCadastro" className="border-link">Cadastrar novo aluno</p>
               </Accordion.Toggle>
@@ -181,24 +181,60 @@ class App extends Component {
                   <ListGroup.Item>
                     <Accordion defaultActiveKey="1">
                       <Card>
+
                         <Card.Header className="card">
                           <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                            <h5 className="p-form">Nome: {data.nome}</h5>
+                            <h5 className="h5-form">{data.nome}</h5>
                           </Accordion.Toggle>
                         </Card.Header>
+
                         <Accordion.Collapse eventKey="0">
-                          <Card.Body>
+                          <Card.Body c>
+                            <Container>
+                              <ListGroup.Item>
+                                <Row>
+                                  <Col xs={3} className="coluna">
+                                    <p className="p-lista">{`CPF: ${data.CPF}`}</p>
+                                  </Col>
+
+                                  <Col xs={3} className="coluna">
+                                    <p className="p-lista">{`RG: ${data.RG}`}</p>
+                                  </Col>
+
+                                  <Col className="coluna">
+                                    <p className="p-lista">{`Data de nascimento: ${data.dataNasc}`}</p>
+                                  </Col>
+                                </Row>
+                              </ListGroup.Item>
+                            </Container>
+
+                            <Container>
+                              <ListGroup.Item>
+                                <Row>
+                                  <Col className="coluna">
+
+                                  </Col>
+                                  <Col className="coluna">
+
+                                  </Col>
+                                </Row>
+                              </ListGroup.Item>
+                            </Container>
 
                             <ListGroup.Item>
-                              <h5>{`Data e hora da criação: ${this.dateFormat(data.horaCriacaoTarefa)}`}</h5>
+                              <p>{`Endereço: ${data.endereco}`}</p>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
-                              <h5>{`Data e hora da entrega: ${this.dateFormat(data.horaEntregaTarefa)}`}</h5>
+                              <p>{`Cidade: ${data.cidade}`}</p>
                             </ListGroup.Item>
 
-                            <ListGroup.Item className="text-descricao">
-                              <h5>{`Descrição:${data.descricao}`}</h5>
+                            <ListGroup.Item>
+                              <p>{`E-mail: ${data.email}`}</p>
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                              <p>{`Telefone: ${data.telefone}`}</p>
                             </ListGroup.Item>
 
                             <Container className="list-group-item text-center">
