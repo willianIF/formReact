@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import { Row, Button, Jumbotron, Card, Accordion, Container, ListGroup, Form, Navbar, Nav, FormControl, Col } from 'react-bootstrap';
-const estagiaAPI = 'https://crudformapi.herokuapp.com/tarefas/';
+// const APIaluno = 'https://crudformapi.herokuapp.com/tarefas/';
+const APIaluno = 'http://localhost:3001/aluno';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      event: 1,
       act: 0,
       index: '',
       datas: []
@@ -20,7 +19,7 @@ class App extends Component {
     this.listar(1);
   }
   async listar(n) {
-    const { data: datas } = await axios.get(estagiaAPI);
+    const { data: datas } = await axios.get(APIaluno);
     if (n === 1) {
       return this.setState({ datas });
     } else {
@@ -32,23 +31,23 @@ class App extends Component {
   cadastrar = (event) => {
     event.preventDefault();
     const obj = {
-      nome: this.refs.nome.value,
-      CPF: this.refs.CPF.value,
-      RG: this.refs.RG.value,
-      dataNasc: this.refs.dataNasc.value,
-      endereco: this.refs.endereco.value,
-      cidade: this.refs.cidade.value,
-      email: this.refs.email.value,
-      telefone: this.refs.telefone.value
+      // nome: this.refs.nome.value,
+      CPF_aluno: this.refs.CPF.value,
+      // RG: this.refs.RG.value,
+      // dataNasc: this.refs.dataNasc.value,
+      endereco_aluno: this.refs.endereco.value,
+      // cidade: this.refs.cidade.value,
+      // email: this.refs.email.value,
+      // telefone: this.refs.telefone.value
     };
 
     if (obj.nome === "" || obj.CPF === "" || obj.RG === "" || obj.dataNasc === "" || obj.endereco === "" || obj.cidade === "" || obj.email === "" || obj.telefone === "") {
       alert("Campo(s) não preenchidos!");
     } else {
       if (this.state.act === 0) {
-        axios.post(estagiaAPI, obj);
+        axios.post(APIaluno, obj);
       } else {
-        axios.put(estagiaAPI + this.state.index, obj);
+        axios.put(APIaluno + this.state.index, obj);
       }
       this.setState({
         act: 0
@@ -62,7 +61,7 @@ class App extends Component {
 
   remover = (event, tarefas) => {
     event.preventDefault();
-    axios.delete(estagiaAPI + tarefas);
+    axios.delete(APIaluno + tarefas);
     this.refs.formTarefas.reset();
     this.listar(0);
   }
@@ -71,14 +70,14 @@ class App extends Component {
     event.preventDefault();
 
     let data = this.state.datas[i];
-    this.refs.nome.value = data.nome;
-    this.refs.CPF.value = data.CPF;
-    this.refs.RG.value = data.RG;
-    this.refs.dataNasc.value = data.dataNasc;
+    // this.refs.nome.value = data.nome;
+    this.refs.CPF.value = data.CPF_aluno;
+    this.refs.RG.value = data.RG_pessoa;
+    // this.refs.dataNasc.value = data.dataNasc;
     this.refs.endereco.value = data.endereco;
-    this.refs.cidade.value = data.cidade;
-    this.refs.email.value = data.email;
-    this.refs.telefone.value = data.telefone;
+    // this.refs.cidade.value = data.cidade;
+    // this.refs.email.value = data.email;
+    // this.refs.telefone.value = data.telefone;
 
     this.setState({
       act: 1,
@@ -95,14 +94,9 @@ class App extends Component {
     return d;
   }
 
-  toggle() {
-    this.setState({
-      event: 0,
-    });
-  }
-
   render() {
     let datas = this.state.datas;
+    console.log(datas);
     return (
       <Container className="App">
         <Jumbotron className="ligth-g shadow bordaJumbotron">
@@ -177,14 +171,14 @@ class App extends Component {
           <Jumbotron className="jumbo">
             <pre>
               {datas.map((data, i) =>
-                <ListGroup key={i}>
-                  <ListGroup.Item>
+                <ListGroup>
+                  <ListGroup.Item key={i + 1} className="card">
                     <Accordion defaultActiveKey="1">
-                      <Card>
+                      <Card >
 
-                        <Card.Header className="card">
+                        <Card.Header  className="card-head sombra" >
                           <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                            <h5 className="h5-form">{data.nome}</h5>
+                            <h5 className="h5-form">{data.nome_pessoa}</h5>
                           </Accordion.Toggle>
                         </Card.Header>
 
@@ -193,16 +187,16 @@ class App extends Component {
                             <Container>
                               <ListGroup.Item>
                                 <Row>
-                                  <Col xs={3} className="coluna">
-                                    <p className="p-lista">{`CPF: ${data.CPF}`}</p>
+                                  <Col xs={4} className="coluna">
+                                    <p className="p-lista">{`CPF: ${data.CPF_aluno}`}</p>
                                   </Col>
 
-                                  <Col xs={3} className="coluna">
-                                    <p className="p-lista">{`RG: ${data.RG}`}</p>
+                                  <Col xs={2} className="coluna">
+                                    <p className="p-lista">{`RG: ${data.RG_pessoa}`}</p>
                                   </Col>
 
                                   <Col className="coluna">
-                                    <p className="p-lista">{`Data de nascimento: ${data.dataNasc}`}</p>
+                                    <p className="p-lista">{`Data de nascimento: ${data.data_nascimento_pessoa}`}</p>
                                   </Col>
                                 </Row>
                               </ListGroup.Item>
@@ -212,34 +206,39 @@ class App extends Component {
                               <ListGroup.Item>
                                 <Row>
                                   <Col className="coluna">
-
+                                    <p className="p-lista">{`Endereço: ${data.endereco_aluno}`}</p>
                                   </Col>
-                                  <Col className="coluna">
 
+                                  <Col className="coluna">
+                                    <p className="p-lista">{`Cidade: ${data.nome_cidade}`}</p>
+                                  </Col>
+
+                                  <Col className="coluna">
+                                    <p className="p-lista">{`Bairro: ${data.bairro_aluno}`}</p>
                                   </Col>
                                 </Row>
                               </ListGroup.Item>
                             </Container>
 
-                            <ListGroup.Item>
-                              <p>{`Endereço: ${data.endereco}`}</p>
-                            </ListGroup.Item>
+                            <Container>
+                              <ListGroup.Item>
+                                <Row>
+                                  <Col className="coluna">
+                                    <p className="p-lista">{`E-mail: ${data.email_pessoa}`}</p>
+                                  </Col>
 
-                            <ListGroup.Item>
-                              <p>{`Cidade: ${data.cidade}`}</p>
-                            </ListGroup.Item>
+                                  <Col className="coluna">
+                                    <p className="p-lista">{`Telefone: ${data.numero_telefone_pessoa}`}</p>
+                                  </Col>
+                                </Row>
+                              </ListGroup.Item>
+                            </Container>
 
-                            <ListGroup.Item>
-                              <p>{`E-mail: ${data.email}`}</p>
-                            </ListGroup.Item>
-
-                            <ListGroup.Item>
-                              <p>{`Telefone: ${data.telefone}`}</p>
-                            </ListGroup.Item>
-
-                            <Container className="list-group-item text-center">
-                              <Button id="btnRemover" variant="btn btn-danger-list" onClick={(e) => this.remover(e, data.id)}>Remover</ Button>
-                              <Button variant="btn btn-list" onClick={(e) => this.editar(e, data.id, i)}>Editar</ Button>
+                            <Container className="text-center">
+                              <ListGroup.Item>
+                                <Button id="btnRemover" variant="btn btn-danger-list" onClick={(e) => this.remover(e, data.id)}>Remover</ Button>
+                                <Button variant="btn btn-list" onClick={(e) => this.editar(e, data.id, i)}>Editar</ Button>
+                              </ListGroup.Item>
                             </Container>
 
                           </Card.Body>
