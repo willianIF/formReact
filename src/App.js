@@ -42,7 +42,7 @@ class App extends Component {
       telefone_pessoa: this.refs.telefone.value
     };
 
-    if (obj.nome === "" || obj.CPF === "" || obj.RG === "" || obj.dataNasc === "" || obj.endereco === "" || obj.cidade === "" || obj.email === "" || obj.telefone === "") {
+    if (obj.nome_pessoa === "" || obj.CPF_aluno === "" || obj.RG_pessoa === "" || obj.data_nascimento_pessoa === "" || obj.endereco_aluno === "" || obj.nome_cidade === "" || obj.email_pessoa === "" || obj.numero_telefone_pessoafone === "") {
       alert("Campo(s) não preenchidos!");
     } else {
       if (this.state.act === 0) {
