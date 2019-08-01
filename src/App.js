@@ -171,8 +171,8 @@ class App extends Component {
           <Jumbotron className="jumbo">
             <pre>
               {datas.map((data, i) =>
-                <ListGroup>
-                  <ListGroup.Item key={i + 1} className="card">
+                <ListGroup key={i}>
+                  <ListGroup.Item className="card">
                     <Accordion defaultActiveKey="1">
                       <Card >
 
