@@ -3,7 +3,8 @@ import axios from 'axios';
 import './App.css';
 import { Row, Button, Jumbotron, Card, Accordion, Container, ListGroup, Form, Navbar, Nav, FormControl, Col } from 'react-bootstrap';
 // const APIaluno = 'https://crudformapi.herokuapp.com/tarefas/';
-const APIaluno = 'http://localhost:3001/aluno';
+// const APIaluno = 'http://localhost:3001/alunos'; //lista de alunos
+const APIaluno = 'http://localhost:3001/aluno/'; //aluno por id
 
 class App extends Component {
   constructor(props) {
@@ -31,14 +32,14 @@ class App extends Component {
   cadastrar = (event) => {
     event.preventDefault();
     const obj = {
-      // nome: this.refs.nome.value,
+      nome_pessoa: this.refs.nome.value,
       CPF_aluno: this.refs.CPF.value,
-      // RG: this.refs.RG.value,
-      // dataNasc: this.refs.dataNasc.value,
+      RG_pessoa: this.refs.RG.value,
+      data_nascimento_pessoa: this.refs.dataNasc.value,
       endereco_aluno: this.refs.endereco.value,
-      // cidade: this.refs.cidade.value,
-      // email: this.refs.email.value,
-      // telefone: this.refs.telefone.value
+      nome_cidade: this.refs.cidade.value,
+      email_pessoa: this.refs.email.value,
+      telefone_pessoa: this.refs.telefone.value
     };
 
     if (obj.nome === "" || obj.CPF === "" || obj.RG === "" || obj.dataNasc === "" || obj.endereco === "" || obj.cidade === "" || obj.email === "" || obj.telefone === "") {
@@ -70,14 +71,14 @@ class App extends Component {
     event.preventDefault();
 
     let data = this.state.datas[i];
-    // this.refs.nome.value = data.nome;
+    this.refs.nome.value = data.nome_pessoa;
     this.refs.CPF.value = data.CPF_aluno;
     this.refs.RG.value = data.RG_pessoa;
-    // this.refs.dataNasc.value = data.dataNasc;
+    this.refs.dataNasc.value = data.data_nascimento_pessoa;
     this.refs.endereco.value = data.endereco;
-    // this.refs.cidade.value = data.cidade;
-    // this.refs.email.value = data.email;
-    // this.refs.telefone.value = data.telefone;
+    this.refs.cidade.value = data.nome_cidade;
+    this.refs.email.value = data.email_pessoa;
+    this.refs.telefone.value = data.telefone_pessoa;
 
     this.setState({
       act: 1,
