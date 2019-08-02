@@ -5,9 +5,9 @@ import { Row, Button, Jumbotron, Card, Accordion, Container, ListGroup, Form, Na
 // const APIalunoListar = 'https://crudformapi.herokuapp.com/tarefas/';
 const APIalunoListar = 'http://localhost:3001/alunos'; //lista de alunos
 const APIalunoInsert = 'http://localhost:3001/alunoInsert';
-const APIalunoUpdate = 'http://localhost:3001/aluno/6';
+const APIalunoUpdate = 'http://localhost:3001/';
 // const APIaluno = 'http://localhost:3001/aluno/6'; //aluno por id
-const APIalunoDelete = 'http://localhost:3001/aluno-delete/';
+const APIalunoDelete = 'http://localhost:3001/alunoDelete/';
 
 class App extends Component {
   constructor(props) {
@@ -69,7 +69,7 @@ class App extends Component {
     event.preventDefault();
     axios.delete(APIalunoDelete + tarefas);
     this.refs.formTarefas.reset();
-    this.listar(0);
+    // this.listar(0);
   }
 
   editar = (event, tarefa, i) => {
@@ -100,8 +100,6 @@ class App extends Component {
     d += " " + format[1];
     return d;
   }
-
-  
 
   render() {
     let datas = this.state.datas;
@@ -248,8 +246,8 @@ class App extends Component {
 
                             <Container className="text-center">
                               <ListGroup.Item>
-                                <Button id="btnRemover" variant="btn btn-danger-list" onClick={(e) => this.remover(e, data.id)}>Remover</ Button>
-                                <Button variant="btn btn-list" onClick={(e) => this.editar(e, data.id, i)}>Editar</ Button>
+                                <Button id="btnRemover" variant="btn btn-danger-list" onClick={(e) => this.remover(e, data.idaluno)}>Remover</ Button>
+                                <Button variant="btn btn-list" onClick={(e) => this.editar(e, data.idaluno, i)}>Editar</ Button>
                               </ListGroup.Item>
                             </Container>
 
