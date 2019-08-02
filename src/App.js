@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import { Row, Button, Jumbotron, Card, Accordion, Container, ListGroup, Form, Navbar, Nav, FormControl, Col } from 'react-bootstrap';
-// const APIaluno = 'https://crudformapi.herokuapp.com/tarefas/';
-// const APIaluno = 'http://localhost:3001/alunos'; //lista de alunos
-const APIaluno = 'http://localhost:3001/aluno/'; //aluno por id
+// const APIalunoListar = 'https://crudformapi.herokuapp.com/tarefas/';
+const APIalunoListar = 'http://localhost:3001/alunos'; //lista de alunos
+const APIalunoInsert = 'http://localhost:3001/alunoInsert';
+const APIalunoUpdate = 'http://localhost:3001/aluno/6';
+// const APIaluno = 'http://localhost:3001/aluno/6'; //aluno por id
+const APIalunoDelete = 'http://localhost:3001/aluno-delete/';
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +23,7 @@ class App extends Component {
     this.listar(1);
   }
   async listar(n) {
-    const { data: datas } = await axios.get(APIaluno);
+    const { data: datas } = await axios.get(APIalunoListar);
     if (n === 1) {
       return this.setState({ datas });
     } else {
@@ -37,18 +40,20 @@ class App extends Component {
       RG_pessoa: this.refs.RG.value,
       data_nascimento_pessoa: this.refs.dataNasc.value,
       endereco_aluno: this.refs.endereco.value,
+      bairro_aluno: this.refs.bairro.value,
       nome_cidade: this.refs.cidade.value,
       email_pessoa: this.refs.email.value,
-      telefone_pessoa: this.refs.telefone.value
+      numero_telefone_pessoa: this.refs.telefone.value
     };
+    console.log(obj);
 
     if (obj.nome_pessoa === "" || obj.CPF_aluno === "" || obj.RG_pessoa === "" || obj.data_nascimento_pessoa === "" || obj.endereco_aluno === "" || obj.nome_cidade === "" || obj.email_pessoa === "" || obj.numero_telefone_pessoafone === "") {
       alert("Campo(s) não preenchidos!");
     } else {
       if (this.state.act === 0) {
-        axios.post(APIaluno, obj);
+        axios.post(APIalunoInsert, obj);
       } else {
-        axios.put(APIaluno + this.state.index, obj);
+        axios.put(APIalunoUpdate + this.state.index, obj);
       }
       this.setState({
         act: 0
@@ -56,13 +61,13 @@ class App extends Component {
 
       this.refs.formTarefas.reset();
       this.refs.nome.focus();
-      this.listar(0);
+      this.componentDidMount();
     }
   }
 
   remover = (event, tarefas) => {
     event.preventDefault();
-    axios.delete(APIaluno + tarefas);
+    axios.delete(APIalunoDelete + tarefas);
     this.refs.formTarefas.reset();
     this.listar(0);
   }
@@ -75,10 +80,11 @@ class App extends Component {
     this.refs.CPF.value = data.CPF_aluno;
     this.refs.RG.value = data.RG_pessoa;
     this.refs.dataNasc.value = data.data_nascimento_pessoa;
-    this.refs.endereco.value = data.endereco;
+    this.refs.endereco.value = data.endereco_aluno;
+    this.refs.bairro.value = data.bairro_aluno;
     this.refs.cidade.value = data.nome_cidade;
     this.refs.email.value = data.email_pessoa;
-    this.refs.telefone.value = data.telefone_pessoa;
+    this.refs.telefone.value = data.numero_telefone_pessoa;
 
     this.setState({
       act: 1,
@@ -95,9 +101,10 @@ class App extends Component {
     return d;
   }
 
+  
+
   render() {
     let datas = this.state.datas;
-    console.log(datas);
     return (
       <Container className="App">
         <Jumbotron className="ligth-g shadow bordaJumbotron">
@@ -124,7 +131,7 @@ class App extends Component {
 
             <Accordion.Collapse eventKey="0">
               <Container>
-                <Form ref="dadosAlunos">
+                <Form ref="formTarefas">
                   <Form.Group>
                     <Form.Label><p className="p-form">Nome</p></Form.Label>
                     <Form.Control type="text" name="nome" ref="nome" placeholder="Nome do aluno" required="required"></Form.Control>
@@ -152,6 +159,10 @@ class App extends Component {
                     <Col>
                       <Form.Label><p className="p-form">Cidade</p></Form.Label>
                       <Form.Control type="text" name="cidade" ref="cidade" placeholder="Cidade do aluno" required="required"></Form.Control>
+                    </Col>
+                    <Col>
+                      <Form.Label><p className="p-form">Bairro</p></Form.Label>
+                      <Form.Control type="text" name="bairro" ref="bairro" placeholder="Bairro do aluno" required="required"></Form.Control>
                     </Col>
                   </Form.Row>
 
@@ -197,7 +208,7 @@ class App extends Component {
                                   </Col>
 
                                   <Col className="coluna">
-                                    <p className="p-lista">{`Data de nascimento: ${data.data_nascimento_pessoa}`}</p>
+                                    <p className="p-lista">{`Data de nascimento: ${this.dateFormat(data.data_nascimento_pessoa)}`}</p>
                                   </Col>
                                 </Row>
                               </ListGroup.Item>
